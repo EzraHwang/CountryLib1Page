@@ -7,10 +7,11 @@
     <title>Country Lib</title>
 
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div id="app">
-        {{test}}
+        {{countryInfo}}
     </div>
 </body>
 
@@ -18,9 +19,14 @@
     const app = Vue.createApp({
         data() {
             return {
-                test: "Hello world"
+                countryInfo: ''
             }
         },
+        mounted() {
+            axios
+                .get('https://restcountries.eu/rest/v2/all')
+                .then(response => (this.countryInfo = response));
+        }
     })
     
     app.mount('#app');
